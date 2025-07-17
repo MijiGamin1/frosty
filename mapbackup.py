@@ -29,6 +29,7 @@ def varcheck(val):
 vars = {}
 loops = {}
 cmd = ""
+i = 0
 
 key = ""
 val = ""
@@ -48,24 +49,22 @@ text = input("File: ")
 
 with open(text, 'r') as file:
     for line in file:
-        for i in range(len(line)):
+        while i < len(line):
             cmd = line[i]
             if cmd == "+":
                 i += 1
                 while line[i] != "/":
                     key += line[i]
                     i += 1
-                    if not key in vars:
-                        vars[key] = []
+                if not key in vars:
+                    vars[key] = []
                 i += 1
                 while line[i] != "/":
                     val += line[i]
                     i += 1
                 val = varcheck(val)
-                i += 1
                 vars[key].append(int(val))
                 cleanup()
-                i += 2
             if cmd == "~": #~0/1/0/
                 i += 1
                 while line[i] != "/":
@@ -81,23 +80,19 @@ with open(text, 'r') as file:
                     new += line[i]
                     i += 1
                 new = varcheck(new)
-                i += 1
                 vars[key][int(val)] = int(new)
                 cleanup()
-                i += 2
             if cmd == "." or cmd == ",":
                 i += 1
                 while line[i] != "/":
                     val += line[i]
                     i += 1
                 val = varcheck(val)
-                i += 1
                 if cmd == ".":
                     print(val)
                 elif cmd == ",":
                     print(chr(int(val)))
                 cleanup()
-                i += 2
             if cmd == "@":
                 i += 1
                 while line[i] != "/":
@@ -108,12 +103,10 @@ with open(text, 'r') as file:
                     val += line[i]
                     i += 1
                 val = varcheck(val)
-                i += 1
                 num = int(input("Enter number:"))
                 vars[key][int(val)] = num
                 cleanup()
-                i += 2
-            if cmd == ":": #this is for repeat, make it like :0/5:, where it repeats 5 times with an ID (rid) of zero, then the end of the loop is ::0::
+            if cmd == ":": #this is for repeat, make it like :0/5/, where it repeats 5 times with an ID (rid) of zero, then the end of the loop is ::0::
                 i += 1
                 while line[i] != "/":
                     rid += line[i]
@@ -126,7 +119,6 @@ with open(text, 'r') as file:
                     i += 1
                 rval = varcheck(rval)
                 loops[rid].append(int(rval))
-                i += 2
                 if rp == 0:
                     rp = i
                     loops[rid].append(int(rp))
@@ -143,8 +135,8 @@ with open(text, 'r') as file:
                     loops[val][0] -= 1
                     i = loops[val][1] 
                 else:
-                    i += 2
-                cleanup()
-            print(i)
-            print(loops)
-            print(vars)
+                    cleanup()
+            else:
+                i += 1
+            #print(loops)
+            #print(vars)
