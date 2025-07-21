@@ -13,8 +13,7 @@ def varcheck(val):
     vkey = ""
     vval = ""
     j = 0
-    if "*" in val: #+0/*0/0*:
-        print(val)
+    if "*" in val: #+0/*0-0*:
         val = val[val.index("*")+1:]
         while val[j] != "-":
             vkey += val[j]
@@ -37,6 +36,7 @@ i = 0
 key = ""
 val = ""
 new = ""
+fff = ""
 num = 0
 
 vkey = ""
@@ -148,6 +148,34 @@ with open(text, 'r') as file:
                     i = loops[val][1] 
                 else:
                     cleanup()
+            if cmd == "a" or cmd == "s" or cmd == "d" or cmd == "x": #a[key]/[index]/[num1]/[num2]/ Add Subtract Divide multiply (X)
+                i += 1
+                while line[i] != "/": 
+                    key += line[i]
+                    i += 1
+                i += 1
+                while line[i] != "/":
+                    val += line[i]
+                    i += 1
+                i += 1
+                while line[i] != "/":
+                    new += line[i]
+                    i += 1
+                new = varcheck(new)
+                i += 1
+                while line[i] != "/":
+                    fff += line[i]
+                    i += 1
+                fff = varcheck(fff)
+                if cmd == "a":
+                    vars[key][int(val)] = int(new) + int(fff)
+                if cmd == "s":
+                    vars[key][int(val)] = int(new) - int(fff)
+                if cmd == "d":
+                    vars[key][int(val)] = round(int(new) / int(fff)) #decimals? in MY integer-based esolang?
+                if cmd == "x":
+                    vars[key][int(val)] = int(new) * int(fff)
+                cleanup()
             else:
                 i += 1
             #print(loops)
