@@ -13,8 +13,9 @@ def varcheck(val):
     vkey = ""
     vval = ""
     j = 0
-    if val[0] == "*": #+0/*0/0*:
-        val = val[1:]
+    if "*" in val: #+0/*0/0*:
+        print(val)
+        val = val[val.index("*")+1:]
         while val[j] != "-":
             vkey += val[j]
             j += 1
@@ -22,6 +23,8 @@ def varcheck(val):
         while val[j] != "*":
             vval += val[j]
             j += 1
+        if vkey == "i": #trying to make iterator with varcheck, *i-0* means iteration of loop with id zero, good luck soldier
+            return loops[vval][0]
         return vars[vkey][int(vval)]
     else:
         return val
@@ -138,5 +141,5 @@ with open(text, 'r') as file:
                     cleanup()
             else:
                 i += 1
-            #print(loops)
-            #print(vars)
+            print(loops)
+            print(vars)
