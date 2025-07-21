@@ -47,6 +47,8 @@ rid = "" #id of loop
 rval = "" #amount of times loop repeats
 rp = 0 #place loop starts
 
+prstr = ""
+
 
 text = input("File: ")
 
@@ -85,7 +87,7 @@ with open(text, 'r') as file:
                 new = varcheck(new)
                 vars[key][int(val)] = int(new)
                 cleanup()
-            if cmd == "." or cmd == ",":
+            if cmd == "." or cmd == "," or cmd == "!" or cmd == "\\": #printing
                 i += 1
                 while line[i] != "/":
                     val += line[i]
@@ -95,6 +97,13 @@ with open(text, 'r') as file:
                     print(val)
                 elif cmd == ",":
                     print(chr(int(val)))
+                elif cmd == "\\":
+                    print(vars[val])
+                elif cmd == "!":
+                    for x in range(len(vars[val])):
+                        prstr += chr(int(vars[val][x]))
+                    print(prstr)
+                    prstr = ""
                 cleanup()
             if cmd == "@":
                 i += 1
@@ -141,5 +150,5 @@ with open(text, 'r') as file:
                     cleanup()
             else:
                 i += 1
-            print(loops)
-            print(vars)
+            #print(loops)
+            #print(vars)
