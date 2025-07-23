@@ -90,6 +90,7 @@ with open(text, 'r') as file:
                 while line[i] != "/":
                     key += line[i]
                     i += 1
+                key = varcheck(key)
                 i += 1
                 while line[i] != "/":
                     val += line[i]
@@ -125,6 +126,7 @@ with open(text, 'r') as file:
                 while line[i] != "/":
                     key += line[i]
                     i += 1
+                key = varcheck(key)
                 i += 1
                 while line[i] != "/":
                     val += line[i]
@@ -168,10 +170,12 @@ with open(text, 'r') as file:
                 while line[i] != "/": 
                     key += line[i]
                     i += 1
+                key = varcheck(key)
                 i += 1
                 while line[i] != "/":
                     val += line[i]
                     i += 1
+                val = varcheck(val)
                 i += 1
                 while line[i] != "/":
                     new += line[i]
@@ -217,5 +221,18 @@ with open(text, 'r') as file:
                 else:
                     i = ifcheck(line, new)
                     cleanup()
+            if cmd == "$":
+                i += 1
+                while line[i] != "/":
+                    key += line[i]
+                    i += 1
+                key = varcheck(key)
+                i += 1
+                while line[i] != "/":
+                    val += line[i]
+                    i += 1
+                val = varcheck(val)
+                vars[key].pop(int(val))
+                cleanup()
             else:
                 i += 1
