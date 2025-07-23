@@ -1,12 +1,15 @@
 import sys
+
 def cleanup():
     global key
     global val
     global new
     global num
+    global fff
     key = ""
     val = ""
     new = ""
+    fff = ""
     num = 0
     
 def varcheck(val):
@@ -23,13 +26,25 @@ def varcheck(val):
             vval += val[j]
             j += 1
         if vkey == "i": #trying to make iterator with varcheck, *i-0* means iteration of loop with id zero, good luck soldier
-            return loops[vval][0]
+            return loops[vval][0] #nice job soldier
         return vars[vkey][int(vval)]
     else:
         return val
     
+def ifcheck(line, iid):
+    idc = ""
+    print(iid)
+    for j in range(len(line)):
+        if line[j] == "}":
+            j += 1
+            while line[j] != "/":
+                idc += line[j]
+                j += 1
+            if idc == iid:
+                return j+1
+                
+         
 vars = {}
-loops = {}
 cmd = ""
 i = 0
 
@@ -43,12 +58,12 @@ vkey = ""
 vval = ""
 j = 0
 
+loops = {}
 rid = "" #id of loop
 rval = "" #amount of times loop repeats
 rp = 0 #place loop starts
 
-prstr = ""
-
+prstr = "" #printed string
 
 text = input("File: ")
 
@@ -118,7 +133,7 @@ with open(text, 'r') as file:
                 num = int(input("Enter number:"))
                 vars[key][int(val)] = num
                 cleanup()
-            if cmd == ":": #this is for repeat, make it like :0/5/, where it repeats 5 times with an ID (rid) of zero, then the end of the loop is ::0::
+            if cmd == ":":
                 i += 1
                 while line[i] != "/":
                     rid += line[i]
@@ -148,7 +163,7 @@ with open(text, 'r') as file:
                     i = loops[val][1] 
                 else:
                     cleanup()
-            if cmd == "a" or cmd == "s" or cmd == "d" or cmd == "x": #a[key]/[index]/[num1]/[num2]/ Add Subtract Divide multiply (X)
+            if cmd == "a" or cmd == "s" or cmd == "d" or cmd == "x" or cmd == "m": #a[key]/[index]/[num1]/[num2]/ Add Subtract Divide multiply (X) Modulo
                 i += 1
                 while line[i] != "/": 
                     key += line[i]
@@ -175,8 +190,32 @@ with open(text, 'r') as file:
                     vars[key][int(val)] = round(int(new) / int(fff)) #decimals? in MY integer-based esolang?
                 if cmd == "x":
                     vars[key][int(val)] = int(new) * int(fff)
+                if cmd == "m":
+                    vars[key][int(val)] = int(new) % int(fff)
                 cleanup()
+            if cmd == ">" or cmd == "<" or cmd == "=": #>*0-0*/5/[id]: if key 0 index 0 is larger than 5, continue. if else, go to the } block at the id specified. can also be used as an odd goto/break
+                i += 1
+                while line[i] != "/": 
+                    key += line[i]
+                    i += 1
+                key = varcheck(key)
+                i += 1
+                while line[i] != "/":
+                    val += line[i]
+                    i += 1
+                val = varcheck(val)
+                i += 1
+                while line[i] != "/":
+                    new += line[i]
+                    i += 1
+                if cmd == ">" and int(key) > int(val):
+                    cleanup()
+                elif cmd == "<" and int(key) < int(val):
+                    cleanup()
+                elif cmd == "=" and int(key) == int(val):
+                    cleanup()
+                else:
+                    i = ifcheck(line, new)
+                    cleanup()
             else:
                 i += 1
-            #print(loops)
-            #print(vars)
