@@ -1,4 +1,4 @@
-# Frosty v1.21
+# Frosty v2.21
 # What is Frosty?  
 Frosty is an esolang created by MijiGamin1 just for fun. The entire point of the language is that every variable is stored as a list of integers, and the language revolves around changing and manipulating these integers.  
 
@@ -95,6 +95,17 @@ Examples:
 ```
 \0/ # Prints out the entirety of list 0 in number form
 !1/ # Prints out the entirety of list 1 in ASCII form
+```
+
+### Newline
+By themselves, values printed will print in one continuous line, with no seperation between them. This is where the `n` command comes in.
+
+Just typing `n/` creates a new line, allowing for seperation between printed characters.
+Examples:
+```
+,103/n/,104/ # Prints out:
+                "h
+                 g"
 ```
 
 ## User input
