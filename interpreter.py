@@ -44,7 +44,6 @@ def ifcheck(line, iid):
             if idc == iid:
                 return j
                 
-         
 vars = {}
 cmd = ""
 i = 0
@@ -72,6 +71,7 @@ with open(text, 'r') as file:
     for line in file:
         while i < len(line):
             cmd = line[i]
+            
             if cmd == "+":
                 i += 1
                 while line[i] != "/":
@@ -84,8 +84,13 @@ with open(text, 'r') as file:
                     val += line[i]
                     i += 1
                 val = varcheck(val)
-                vars[key].append(int(val))
+                if not val.isdigit(): #add numeric values of string to integer if val is a string
+                    for n in range(len(val)):
+                        vars[key].append(ord(val[n]))
+                else:
+                    vars[key].append(int(val))
                 cleanup()
+                
             if cmd == "~": #~0/1/0/
                 i += 1
                 while line[i] != "/":
@@ -104,6 +109,7 @@ with open(text, 'r') as file:
                 new = varcheck(new)
                 vars[key][int(val)] = int(new)
                 cleanup()
+                
             if cmd == "." or cmd == "," or cmd == "!" or cmd == "\\": #printing
                 i += 1
                 while line[i] != "/":
@@ -122,6 +128,7 @@ with open(text, 'r') as file:
                     print(prstr, end="")
                     prstr = ""
                 cleanup()
+                
             if cmd == "@":
                 i += 1
                 while line[i] != "/":
@@ -136,6 +143,7 @@ with open(text, 'r') as file:
                 num = int(input("Enter number:"))
                 vars[key][int(val)] = num
                 cleanup()
+                
             if cmd == ":":
                 i += 1
                 while line[i] != "/":
@@ -156,6 +164,7 @@ with open(text, 'r') as file:
                 rval = ""
                 rp = 0
                 cleanup()
+                
             if cmd == "#": 
                 i += 1
                 while line[i] != "/":
@@ -166,6 +175,7 @@ with open(text, 'r') as file:
                     i = loops[val][1] 
                 else:
                     cleanup()
+                    
             if cmd == "a" or cmd == "s" or cmd == "d" or cmd == "x" or cmd == "m": #a[key]/[index]/[num1]/[num2]/ Add Subtract Divide multiply (X) Modulo
                 i += 1
                 while line[i] != "/": 
@@ -198,6 +208,7 @@ with open(text, 'r') as file:
                 if cmd == "m":
                     vars[key][int(val)] = int(new) % int(fff)
                 cleanup()
+                
             if cmd == ">" or cmd == "<" or cmd == "=": #>*0-0*/5/[id]: if key 0 index 0 is larger than 5, continue. if else, go to the } block at the id specified. can also be used as an odd goto/break
                 i += 1
                 while line[i] != "/": 
@@ -222,6 +233,7 @@ with open(text, 'r') as file:
                 else:
                     i = ifcheck(line, new)
                     cleanup()
+                    
             if cmd == "$":
                 i += 1
                 while line[i] != "/":
@@ -235,8 +247,35 @@ with open(text, 'r') as file:
                 val = varcheck(val)
                 vars[key].pop(int(val))
                 cleanup()
+                
             if cmd == "n":
                 i += 1
                 print("")
+                
+            if cmd == "[":
+                i += 1
+                while line[i] != "/": 
+                    key += line[i]
+                    i += 1
+                key = varcheck(key)
+                i += 1
+                while line[i] != "/":
+                    val += line[i]
+                    i += 1
+                val = varcheck(val)
+                i += 1
+                while line[i] != "/":
+                    new += line[i]
+                    i += 1
+                new = varcheck(new)
+                i += 1
+                while line[i] != "/":
+                    fff += line[i]
+                    i += 1
+                fff = varcheck(fff)
+                for h in range(len(vars[key][int(new):int(fff)])): #add the new items one at a time, rather than in their own list
+                    vars[val].append(vars[key][int(new)+h])
+                cleanup()
+                
             else:
                 i += 1
