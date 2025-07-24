@@ -1,4 +1,4 @@
-# Frosty v1.2
+# Frosty v1.21
 # What is Frosty?  
 Frosty is an esolang created by MijiGamin1 just for fun. The entire point of the language is that every variable is stored as a list of integers, and the language revolves around changing and manipulating these integers.  
 
