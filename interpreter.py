@@ -35,7 +35,6 @@ def varcheck(val):
     
 def ifcheck(line, iid):
     idc = ""
-    print(iid)
     for j in range(len(line)):
         if line[j] == "}":
             j += 1
@@ -43,7 +42,7 @@ def ifcheck(line, iid):
                 idc += line[j]
                 j += 1
             if idc == iid:
-                return j+1
+                return j
                 
          
 vars = {}
