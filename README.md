@@ -64,6 +64,13 @@ Examples:
 ~2/2/*1-1*/ # Changes the value of list 2 index 2 to the value of list 1 index 1
 -3/*2-2*/ # Removes the index equivalent to the value of list 2 index 2 from list 3 (I don't know 𝘸𝘩𝘺 you'd do this, but you can.)
 ```
+
+To use the length of a list as a value, replace the key with `_`, and the index with the key.
+Examples:
+```
++1/*_-0*/ # Adds the length of list 0 to list 1
++7/*_-5*/ # Adds the length of list 5 to list 7
+```
 *There are a few exceptions, namely the first parameter of `+`, the first parameter of `:`, and the parameter of `#`, and any other code I'm not touching again with a 39.5 foot pole.
 
 ## Printing
