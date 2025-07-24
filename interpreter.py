@@ -27,6 +27,8 @@ def varcheck(val):
             j += 1
         if vkey == "i": #trying to make iterator with varcheck, *i-0* means iteration of loop with id zero, good luck soldier
             return loops[vval][0] #nice job soldier
+        elif vkey == "_":
+            return len(vars[vval])
         return vars[vkey][int(vval)]
     else:
         return val
