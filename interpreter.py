@@ -111,15 +111,15 @@ with open(text, 'r') as file:
                     i += 1
                 val = varcheck(val)
                 if cmd == ".":
-                    print(val)
+                    print(val, end="")
                 elif cmd == ",":
-                    print(chr(int(val)))
+                    print(chr(int(val)), end="")
                 elif cmd == "\\":
-                    print(vars[val])
+                    print(vars[val], end="")
                 elif cmd == "!":
                     for x in range(len(vars[val])):
                         prstr += chr(int(vars[val][x]))
-                    print(prstr)
+                    print(prstr, end="")
                     prstr = ""
                 cleanup()
             if cmd == "@":
@@ -235,5 +235,8 @@ with open(text, 'r') as file:
                 val = varcheck(val)
                 vars[key].pop(int(val))
                 cleanup()
+            if cmd == "n":
+                i += 1
+                print("")
             else:
                 i += 1
