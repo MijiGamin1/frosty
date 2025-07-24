@@ -1,4 +1,4 @@
-# Frosty v2.21
+# Frosty v3.21
 # What is Frosty?  
 Frosty is an esolang created by MijiGamin1 just for fun. The entire point of the language is that every variable is stored as a list of integers, and the language revolves around changing and manipulating these integers.  
 
@@ -31,6 +31,14 @@ Examples:
 +100/500/ # Adds 500 to list 100
 ```
 (Note: there are no comments in Frosty. The `#` is merely for documentational purposes only.)
+
+However, sometimes Frosty lists are just placeholders for strings. To copy the contents of a string in ASCII form into a list, simply replace the number with a string.
+Examples:
+```
++0/hhh/ # Adds "104, 104, 104" to list 0
++5/Hello/ # Adds "72, 101, 108, 108, 111" to list 5
++2/o o/ # Adds "111 32 111" to list 2
+```
 
 ## Editing the contents of lists
 Adding to lists is cool and all, but what if I want to edit a number I've already added? That's where the `~` command comes in. 
@@ -72,6 +80,16 @@ Examples:
 +7/*_-5*/ # Adds the length of list 5 to list 7
 ```
 *There are a few exceptions, namely the first parameter of `+`, the first parameter of `:`, and the parameter of `#`, and any other code I'm not touching again with a 39.5 foot pole.
+
+## Adding lists to other lists
+Instead of adding each individual item in a list to another one, why not just port over the list itself?
+
+To add a list to another, use the `[` command, followed by the list being added, the list being added to, and the start and end indexes you want to add.
+Examples:
+```
++1/0/1/3/ # Adds list 1 [1:3] to list 0
++2/1/0/*_-2*/ # Adds the entirety of list 2 to list 1
+```
 
 ## Printing
 At the moment we've just been focusing on things happening within the code, but what if you want to show something to the user? That's where printing comes in.
@@ -181,6 +199,5 @@ Examples:
 }0/ # If conditional with an ID of 0 is false, the code continues here
 }2/ # If conditional with an ID of 2 is false, the code continues here
 ```
-
 
 
