@@ -87,8 +87,8 @@ Instead of adding each individual item in a list to another one, why not just po
 To add a list to another, use the `[` command, followed by the list being added, the list being added to, and the start and end indexes you want to add.
 Examples:
 ```
-+1/0/1/3/ # Adds list 1 [1:3] to list 0
-+2/1/0/*_-2*/ # Adds the entirety of list 2 to list 1
+[1/0/1/3/ # Adds list 1 [1:3] to list 0
+[2/1/0/*_-2*/ # Adds the entirety of list 2 to list 1
 ```
 
 ## Printing
