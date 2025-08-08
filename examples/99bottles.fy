@@ -1,0 +1,1 @@
++0/ bottles of beer on the wall/+1/0/[0/1/0/16/+1/./$1/0/+2/Take one down, pass it around,/+3/99/:0/98/.*3-0*/!0/n/.*3-0*/!1/n/!2/n/s3/0/*3-0*/1/.*3-0*/!0/n/n/#0/
